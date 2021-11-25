@@ -8,18 +8,26 @@ class Pokedex(toga.App):
         self.title = title
         self.size = (WIDTH, HEIGHT)
 
+        self.create_elements()
+
     def startup(self):
-        self.main_window = toga.MainWindow('main', title=self.title, size=(self.size))
+        self.main_window = toga.MainWindow('main',title=self.title, size=(self.size))
 
         box = toga.Box()
 
-        self.main_window.content = box
+        split = toga.SplitContainer()
+        split.content = [self.table, box]
+
+        self.main_window.content = split
 
         self.main_window.show()
 
     def create_elements(self):
-        pass
+        self.create_table()
 
+
+    def create_table(self):
+        self.table = toga.Table(['Encabezado 1', 'Ecanbezado 2'])
 
 if __name__ == '__main__':
     pokedex = Pokedex('Pokedex', 'com.tutankadev.pokedex')
