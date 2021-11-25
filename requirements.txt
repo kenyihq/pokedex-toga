@@ -1,0 +1,8 @@
+cffi==1.15.0
+clr-loader==0.1.7
+pycparser==2.21
+pythonnet==3.0.0a1
+toga==0.3.0.dev29
+toga-core==0.3.0.dev29
+toga-winforms==0.3.0.dev29
+travertino==0.1.3
