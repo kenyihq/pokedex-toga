@@ -1,4 +1,5 @@
 import toga
+import requests
 from const import *
 
 class Pokedex(toga.App):
@@ -9,9 +10,10 @@ class Pokedex(toga.App):
         self.size = (WIDTH, HEIGHT)
 
         self.heading = ['Name']
-        self.data = ['Python', 'Ruby']
+        self.data = []
 
         self.create_elements()
+        self.load_data()
 
     def startup(self):
         self.main_window = toga.MainWindow('main',title=self.title, size=(self.size))
@@ -32,6 +34,19 @@ class Pokedex(toga.App):
     def create_table(self):
         self.table = toga.Table(self.heading, data=self.data, on_select = self.select_element)
 
+
+    def load_data(self):
+        path = 'https://pokeapi.co/api/v2/pokemon-form?offset=0&limit=20'
+
+        response = requests.get(path)
+
+        if response:
+            result = response.json()
+            for pokemon in result['results']:
+                name = pokemon['name']
+                self.data.append(name)
+
+        self.table.data = self.data
 
     #Callback
 
